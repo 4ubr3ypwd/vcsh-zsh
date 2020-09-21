@@ -93,7 +93,7 @@ alias edit="subl -n"
  # @see https://github.com/zsh-users/antigen
  # @since Monday, 9/21/2020
  ##
-if ! command -v antigen &> /dev/null; then
+if [[ ! -f "/usr/local/share/antigen/antigen.zsh" ]]; then
 	echo "Please install antigen usiing: brew reinstall antigen"
 else
 	source /usr/local/share/antigen/antigen.zsh # brew install antigen
