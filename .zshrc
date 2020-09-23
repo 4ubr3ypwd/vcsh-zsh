@@ -95,7 +95,9 @@ alias v="vcsh"
  # @since Monday, 9/21/2020
  ##
 if [[ ! -f "/usr/local/share/antigen/antigen.zsh" ]]; then
-	echo "Please install antigen usiing: brew reinstall antigen"
+	echo "Please install antigen:"
+	echo "\tbrew reinstall antigen"
+	echo "\treload"
 else
 	source /usr/local/share/antigen/antigen.zsh # brew install antigen
 
@@ -111,3 +113,18 @@ else
 	antigen apply
 fi
 
+###
+ # ghq Repositories
+ #
+ # For repositories you want to persist on your system, add them below.
+ # This uses ghq to try and (silently) install repositories you want installed.
+ #
+ # @since Wednesday, 9/23/2020
+ ##
+if [[ ! -f "/usr/local/bin/ghq" ]]; then
+	echo "Please install ghq:"
+	echo "\tbrew install ghq"
+	echo "\treload"
+else
+	ghq get git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
+fi
