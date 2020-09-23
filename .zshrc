@@ -84,6 +84,7 @@ if [ "$TERM_PROGRAM" = "Terminus-Sublime" ]; then
 fi
 
 alias edit="subl -n"
+alias v="vcsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # Load fzf autocomplete.
 
