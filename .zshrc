@@ -28,6 +28,8 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting. Make sure th
 export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig" # For pkg-config to find openssl@1.1 you may need to set:
+export LESS="-F -X $LESS" # Don't pager on less.
+export MANPAGER='ul | cat -s'
 
 ###
  # Enable history between panels.
@@ -36,6 +38,7 @@ export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig" # For pkg-conf
  ##
 unsetopt inc_append_history
 unsetopt share_history
+touch "$HOME/.hushlogin" # Don't show last login message anymore.
 
 ###
  # Aliases
@@ -126,6 +129,13 @@ if [ ! -e "$ZSH" ]; then
 fi
 
 ###
+ # Builtin Plugins
+ ##
+plugins=(
+	aubreypwd # Should be symlinked to .config
+)
+
+###
  # Load oh-my-zsh now that it's been configured.
  #
  # @since Thursday, 10/1/2020
@@ -138,13 +148,6 @@ source $ZSH/oh-my-zsh.sh
  # @since Monday, 9/21/2020 frisk
  ##
 ZSH_THEME="frisk"
-
-###
- # Builtin Plugins
- ##
-plugins=(
-	aubreypwd # Should be symlinked to .config
-)
 
 ###
  # Configure my prompt.
@@ -180,6 +183,29 @@ else
 	antigen bundle Tarrasch/zsh-bd
 	antigen bundle aubreypwd/zsh-plugin-x
 	antigen bundle aubreypwd/zsh-plugin-reload
+	antigen bundle aubreypwd/zsh-plugin-require
 
 	antigen apply
 fi
+
+require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
+require "ffmpeg" "brew reinstall ffmpeg"
+require "wget" "brew reinstall wget"
+require "curl" "brew reinstall curl"
+require "svn" "brew reinstall subversion"
+require "trash" "brew reinstall trash-cli"
+require "trash-empty" "brew reinstall trash-cli"
+require "wp" "brew reinstall wp-cli"
+require "youtube-dl" "brew reinstall youtube-dl"
+require "composer" "brew reinstall composer"
+require "hcl" "gem install hcl && hcl config -r"
+require "slack" "brew tap rockymadden/rockymadden && brew reinstall rockymadden/rockymadden/slack-cli && slack init"
+require "fzf" "brew reinstall fzf"
+require "nativefier" "brew reinstall nativefier"
+require "rainbow" "brew reinstall python && sudo easy_install rainbow" # Colorize less.
+require "npm" "brew reinstall node@10.16.1"
+require "git" "brew reinstall git"
+require "hcl" "gem install hcl"
+require "git-open" "npm install --global git-open"
+require "watch" "brew reinstall watch"
+require "python" "brew reinstall python"
