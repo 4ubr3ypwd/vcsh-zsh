@@ -41,22 +41,6 @@ unsetopt share_history
 touch "$HOME/.hushlogin" # Don't show last login message anymore.
 
 ###
- # Aliases
- #
- # @since Thursday, 10/1/2020
- ##
-alias edit="subl -n"
-alias v="vcsh"
-alias ls='ls -laGFh'
-alias c=clear
-alias tower='gittower'
-alias cu="composer uninstall"
-alias ci="composer install --prefer-source"
-alias cid="composer install --prefer-dist"
-alias cr="composer uninstall; composer install"
-alias cri="composer uninstall; composer install --prefer-source"
-
-###
  # ghq Repositories
  #
  # For repositories you want to persist on your system, add them below.
@@ -130,10 +114,24 @@ fi
 
 ###
  # Builtin Plugins
+ #
+ # Must be done before you shource oh-my-zsh.
+ #
+ # @since 10/1/20
  ##
 plugins=(
 	aubreypwd # Should be symlinked to .config
 )
+
+###
+ # Theme
+ #
+ # Must be done before you shource oh-my-zsh.
+ #
+ # @since Monday, 9/21/2020 frisk
+ # @since 10/1/20           ys
+ ##
+ZSH_THEME="ys"
 
 ###
  # Load oh-my-zsh now that it's been configured.
@@ -141,23 +139,6 @@ plugins=(
  # @since Thursday, 10/1/2020
  ##
 source $ZSH/oh-my-zsh.sh
-
-###
- # Theme
- #
- # @since Monday, 9/21/2020 frisk
- ##
-ZSH_THEME="frisk"
-
-###
- # Configure my prompt.
- #
- # @see .oh-my-zsh/themes/frisk.zsh-theme Based on the frisk ZSH theme.
- #
- # @since Thursday, 10/1/2020
- ##
-PROMPT="%{$fg[red]%}%2/%{$reset_color%} %{$fg[blue]%}$(git_prompt_info)%{$reset_color%} $(bzr_prompt_info)% %{$fg[black]%}[%T]%{$reset_color%}
-%{$fg_bold[black]%}$%{$reset_color%} "
 
 ###
  # Antigen Plugin Manager
@@ -209,3 +190,19 @@ require "hcl" "gem install hcl"
 require "git-open" "npm install --global git-open"
 require "watch" "brew reinstall watch"
 require "python" "brew reinstall python"
+
+###
+ # Aliases
+ #
+ # @since Thursday, 10/1/2020
+ ##
+alias edit="subl -n"
+alias v="vcsh"
+alias ls='ls -laGFh'
+alias c=clear
+alias tower='gittower'
+alias cu="composer uninstall"
+alias ci="composer install --prefer-source"
+alias cid="composer install --prefer-dist"
+alias cr="composer uninstall; composer install"
+alias cri="composer uninstall; composer install --prefer-source"
