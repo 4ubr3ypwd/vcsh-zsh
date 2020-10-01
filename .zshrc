@@ -156,9 +156,8 @@ ZSH_THEME="frisk"
  #
  # @since Thursday, 10/1/2020
  ##
-PROMPT=$'
-%{$fg[red]%}%2/%{$reset_color%} $(git_prompt_info)$(bzr_prompt_info)% %{$fg[black]%}[%T]%{$reset_color%}
-%{$fg_bold[black]%}$%{$reset_color%} '
+PROMPT="%{$fg[red]%}%2/%{$reset_color%} %{$fg[blue]%}$(git_prompt_info)%{$reset_color%} $(bzr_prompt_info)% %{$fg[black]%}[%T]%{$reset_color%}
+%{$fg_bold[black]%}$%{$reset_color%} "
 
 ###
  # Antigen Plugin Manager
@@ -184,6 +183,7 @@ else
 	antigen bundle aubreypwd/zsh-plugin-x
 	antigen bundle aubreypwd/zsh-plugin-reload
 	antigen bundle aubreypwd/zsh-plugin-require
+	antigen bundle aubreypwd/zsh-plugin-fzf-git-branch
 
 	antigen apply
 fi
