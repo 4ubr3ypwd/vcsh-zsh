@@ -165,6 +165,11 @@ else
 	antigen bundle aubreypwd/zsh-plugin-reload
 	antigen bundle aubreypwd/zsh-plugin-require
 	antigen bundle aubreypwd/zsh-plugin-fzf-git-branch
+	antigen bundle aubreypwd/zsh-plugin-tdl
+	antigen bundle aubreypwd/zsh-plugin-hide
+	antigen bundle aubreypwd/zsh-plugin-delete
+	antigen bundle aubreypwd/zsh-plugin-comment
+	antigen bundle aubreypwd/zsh-plugin-pwdcp
 
 	antigen apply
 fi
@@ -190,6 +195,15 @@ require "hcl" "gem install hcl"
 require "git-open" "npm install --global git-open"
 require "watch" "brew reinstall watch"
 require "python" "brew reinstall python"
+
+###
+ # Hidden/Unhidden files
+ #
+ # @since Thursday, 10/1/2020
+ # @since Thursday, 10/1/2020 Using hide/unhide from antigen bundle aubreypwd/zsh-plugin-hide
+ ##
+hide "$HOME/Applications"
+unhide "$HOME/Library"
 
 ###
  # Aliases
