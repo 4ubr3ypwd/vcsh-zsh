@@ -44,6 +44,14 @@ unsetopt share_history
  ##
 alias edit="subl -n"
 alias v="vcsh"
+alias ls='ls -laGFh'
+alias c=clear
+alias tower='gittower'
+alias cu="composer uninstall"
+alias ci="composer install --prefer-source"
+alias cid="composer install --prefer-dist"
+alias cr="composer uninstall; composer install"
+alias cri="composer uninstall; composer install --prefer-source"
 
 ###
  # ghq Repositories
