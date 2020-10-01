@@ -89,6 +89,27 @@ alias v="vcsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # Load fzf autocomplete.
 
 ###
+ # ghq Repositories
+ #
+ # For repositories you want to persist on your system, add them below.
+ # This uses ghq to try and (silently) install repositories you want installed.
+ #
+ # @since Wednesday, 9/23/2020
+ ##
+if [[ ! -f "/usr/local/bin/ghq" ]]; then
+	echo "Please install ghq:"
+	echo "\tbrew install ghq"
+	echo "\treload"
+else
+	ghq get git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
+	ghq get git@github.com:aubreypwd/system.git &> /dev/null
+	ghq get git@github.com:aubreypwd/iTerm2.git &> /dev/null
+
+	# Antigen plugins (source for below):
+	ghq get git@github.com:aubreypwd/zsh-plugin-x.git &> /dev/null
+fi
+
+###
  # Antigen Plugin Manager
  #
  # @see https://github.com/zsh-users/antigen
@@ -110,21 +131,8 @@ else
 	antigen bundle z # Builtin
 	antigen bundle Tarrasch/zsh-bd # https://github.com/Tarrasch/zsh-bd
 
-	antigen apply
-fi
+	# My plugins (source via ghq above).
+	antigen bundle $(ghq root)/github.com/aubreypwd/zsh-plugin-x --no-local-clone # https://github.com/aubreypwd/zsh-plugin-x
 
-###
- # ghq Repositories
- #
- # For repositories you want to persist on your system, add them below.
- # This uses ghq to try and (silently) install repositories you want installed.
- #
- # @since Wednesday, 9/23/2020
- ##
-if [[ ! -f "/usr/local/bin/ghq" ]]; then
-	echo "Please install ghq:"
-	echo "\tbrew install ghq"
-	echo "\treload"
-else
-	ghq get git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
+	antigen apply
 fi
