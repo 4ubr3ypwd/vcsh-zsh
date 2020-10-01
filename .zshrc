@@ -102,6 +102,14 @@ export UPDATE_ZSH_DAYS=90
 export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
 
 ###
+ # Hidden/Unhidden files
+ #
+ # @since Thursday, 10/1/2020
+ ##
+chflags hidden "$HOME/Applications"
+chflags nohidden "$HOME/Library"
+
+###
  # Bail if oh-my-zsh isn't installed yet.
  #
  # @since Thursday, 10/1/2020
@@ -170,6 +178,7 @@ else
 	antigen bundle aubreypwd/zsh-plugin-delete
 	antigen bundle aubreypwd/zsh-plugin-comment
 	antigen bundle aubreypwd/zsh-plugin-pwdcp
+	antigen bundle aubreypwd/zsh-plugin-cvideo
 
 	antigen apply
 fi
@@ -195,15 +204,6 @@ require "hcl" "gem install hcl"
 require "git-open" "npm install --global git-open"
 require "watch" "brew reinstall watch"
 require "python" "brew reinstall python"
-
-###
- # Hidden/Unhidden files
- #
- # @since Thursday, 10/1/2020
- # @since Thursday, 10/1/2020 Using hide/unhide from antigen bundle aubreypwd/zsh-plugin-hide
- ##
-hide "$HOME/Applications"
-unhide "$HOME/Library"
 
 ###
  # Aliases
