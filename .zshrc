@@ -128,6 +128,7 @@ else
 	antigen bundle z # Builtin
 	antigen bundle Tarrasch/zsh-bd
 	antigen bundle aubreypwd/zsh-plugin-x
+	antigen bundle aubreypwd/zsh-plugin-reload
 
 	antigen apply
 fi
