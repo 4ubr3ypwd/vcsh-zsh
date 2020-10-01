@@ -104,9 +104,6 @@ else
 	ghq get git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
 	ghq get git@github.com:aubreypwd/system.git &> /dev/null
 	ghq get git@github.com:aubreypwd/iTerm2.git &> /dev/null
-
-	# Antigen plugins (source for below):
-	ghq get git@github.com:aubreypwd/zsh-plugin-x.git &> /dev/null
 fi
 
 ###
@@ -129,10 +126,8 @@ else
 	antigen bundle history-substring-search # Builtin
 	antigen bundle osx # Builtin
 	antigen bundle z # Builtin
-	antigen bundle Tarrasch/zsh-bd # https://github.com/Tarrasch/zsh-bd
-
-	# My plugins (source via ghq above).
-	antigen bundle $(ghq root)/github.com/aubreypwd/zsh-plugin-x --no-local-clone # https://github.com/aubreypwd/zsh-plugin-x
+	antigen bundle Tarrasch/zsh-bd
+	antigen bundle aubreypwd/zsh-plugin-x
 
 	antigen apply
 fi
