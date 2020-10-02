@@ -38,6 +38,31 @@ export MANPAGER='ul | cat -s'
 export COMPOSER_PROCESS_TIMEOUT=15 # Fail after 15 seconds.
 
 ###
+ # macOS Default Flags
+ #
+ # Note, if you modify please delete the $flagfile
+ #
+ # @since Thursday, 10/1/2020
+ ##
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write com.apple.TextEdit SmartQuotes -bool false
+defaults write com.apple.TextEdit SmartDashes -bool false
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+defaults write com.dteoh.SlowQuitApps invertList -bool YES # Make whitelist a blacklist
+defaults write com.dteoh.SlowQuitApps delay -int 1000 # On whitelisted apps, quit after 3 seconds
+defaults write com.apple.screencapture location "$screenshots_dir"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+defaults write com.apple.Finder QuitMenuItem 1 # Add quit to Finder
+defaults write com.apple.dock springboard-columns -int 7 && defaults write com.apple.dock springboard-rows -int 7 # Launchpad Grid
+defaults write com.apple.Dock autohide-delay -float 0 # Show dock after X seconds, e.g. 99 could hide it.
+defaults write com.apple.dock showhidden -bool false # When Apps are hidden, dim them in Dock.
+defaults write com.apple.dock static-only -bool false # Only show running apps in Dock (when set to true)
+defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
+
+
+###
  # Enable history between panels.
  #
  # @since Thursday, 10/1/2020
