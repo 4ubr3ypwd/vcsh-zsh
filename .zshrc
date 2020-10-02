@@ -229,6 +229,7 @@ else
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-download
 	antigen bundle ssh://git@github.com/WebDevStudios/zsh-plugin-satisbuild.git
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-bruse.git
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-vcshr.git
 
 	antigen apply
 fi
@@ -260,6 +261,29 @@ require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Hom
 	require "watchexec" "brew reinstall watchexec" "brew"
 	require "ffmpeg" "brew reinstall ffmpeg" "brew"
 		require "gifify" "brew reinstall gifify" "brew"
+	require "vcsh" "brew reinstall vcsh" "brew"
+
+###
+ # Require VCSH Repositories
+ #
+ # @since Friday, 10/2/2020
+ # @see https://github.com/aubreypwd/zsh-plugin-vcshr vcshr command.
+ ##
+if [[ ! $( command -v vcsh ) ]]; then
+	echo "Could not find command 'vcsh', please reinstall and reload."
+else
+	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh
+	vcshr "choosy" "aubreypwd" "vcsh-choosy" --overwrite --autoignore --ssh
+	vcshr "composer" "aubreypwd" "vcsh-composer" --overwrite --autoignore --ssh
+	vcshr "git" "aubreypwd" "vcsh-git" --overwrite --autoignore --ssh
+	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh
+	vcshr "node" "aubreypwd" "vcsh-node" --overwrite --autoignore --ssh
+	vcshr "specktacle" "aubreypwd" "vcsh-specktacle" --overwrite --autoignore --ssh
+	vcshr "sublime-text-3-snippets" "aubreypwd" "vcsh-sublime-text-3-snippets" --overwrite --autoignore --ssh
+	vcshr "sublime-text-3" "aubreypwd" "vcsh-sublime-text-3" --overwrite --autoignore --ssh
+	vcshr "zsh-secure" "aubreypwd" "vcsh-zsh-secure" --overwrite --autoignore --ssh
+	vcshr "zsh" "aubreypwd" "vcsh-zsh" --overwrite --autoignore --ssh
+fi
 
 ###
  # Aliases
