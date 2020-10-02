@@ -61,6 +61,16 @@ defaults write com.apple.dock showhidden -bool false # When Apps are hidden, dim
 defaults write com.apple.dock static-only -bool false # Only show running apps in Dock (when set to true)
 defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
 
+###
+ # Make sure that Greenshot Screenshots make it to the ~/Pictures/Screenshots/Greenshot folder.
+ #
+ # @since Thursday, 10/1/2020
+ ##
+[[ -d "$HOME/Pictures/Greenshot" ]] || $(
+	mkdir -p "$HOME/Pictures/Screenshots/Greenshot"
+	ln -sf "$HOME/Pictures/Screenshots/Greenshot" "$HOME/Pictures/Greenshot"
+)
+
 
 ###
  # Enable history between panels.
