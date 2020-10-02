@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Don't show last login message anymore.
+touch "$HOME/.hushlogin"
+
 # Make sure keys and identities make it into keychain.
 ssh-add -q -A -k >/dev/null 2>&1
 
@@ -79,7 +82,6 @@ defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non
  ##
 unsetopt inc_append_history
 unsetopt share_history
-touch "$HOME/.hushlogin" # Don't show last login message anymore.
 
 ###
  # ghq Repositories
@@ -90,9 +92,8 @@ touch "$HOME/.hushlogin" # Don't show last login message anymore.
  # @since Wednesday, 9/23/2020
  ##
 if [[ ! -f "/usr/local/bin/ghq" ]]; then
-	echo "Please install ghq:"
-	echo "\tbrew install ghq"
-	echo "\treload"
+	echo "Please install ghq and reload to install persistent repos:"
+	echo "  brew install ghq"
 else
 	ghq get git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
 	ghq get git@github.com:aubreypwd/system.git &> /dev/null
@@ -157,7 +158,7 @@ chflags nohidden "$HOME/Library"
  ##
 if [ ! -e "$ZSH" ]; then
 	echo ".oh-my-zsh isn't installed!"
-	echo "\thttps://ohmyz.sh/#install"
+	echo "  https://ohmyz.sh/#install"
 	exit;
 fi
 
@@ -189,8 +190,6 @@ ZSH_THEME="ys"
  ##
 source $ZSH/oh-my-zsh.sh
 
-# export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
-
 ###
  # Antigen Plugin Manager
  #
@@ -198,9 +197,8 @@ source $ZSH/oh-my-zsh.sh
  # @since Monday, 9/21/2020
  ##
 if [[ ! -f "/usr/local/share/antigen/antigen.zsh" ]]; then
-	echo "Please install antigen:"
-	echo "\tbrew reinstall antigen"
-	echo "\treload"
+	echo "Please install antigen and reload to install ZSH plugins:"
+	echo "  Homebrew: brew reinstall antigen"
 else
 	source /usr/local/share/antigen/antigen.zsh # brew install antigen
 
@@ -217,6 +215,8 @@ else
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-x
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-reload
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require
+		# export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
+
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fzf-git-branch
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-tdl
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-hide
@@ -228,35 +228,43 @@ else
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fd
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-download
 	antigen bundle ssh://git@github.com/WebDevStudios/zsh-plugin-satisbuild.git
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-bruse.git
 
 	antigen apply
 fi
 
+###
+ # Required Commands
+ #
+ # @see   https://github.com/aubreypwd/zsh-plugin-require Uses this bundle to run require function/command.
+ #
+ # @since Friday, 10/2/2020 The initial ones.
+ ##
 require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
-require "wget" "brew reinstall wget"
-require "curl" "brew reinstall curl"
-require "svn" "brew reinstall subversion"
-require "trash" "brew reinstall trash-cli"
-	require "trash-empty" "brew reinstall trash-cli"
-require "wp" "brew reinstall wp-cli"
-require "composer" "brew reinstall composer"
-require "hcl" "gem install hcl && hcl config -r"
-require "slack" "brew tap rockymadden/rockymadden && brew reinstall rockymadden/rockymadden/slack-cli && slack init"
-require "fzf" "brew reinstall fzf"
-require "nativefier" "brew reinstall nativefier"
-require "python" "brew reinstall python"
-	require "rainbow" "easy_install rainbow" # Colorize less.
-require "npm" "brew reinstall node" # Also installs node.
-require "git" "brew reinstall git"
-require "watch" "brew reinstall watch"
-require "watchexec" "brew reinstall watchexec"
-require "ffmpeg" "brew reinstall ffmpeg"
-	require "gifify" "brew reinstall gifify"
+	require "curl" "brew reinstall curl"  "brew"
+	require "wget" "brew reinstall wget" "brew"
+	require "svn" "brew reinstall subversion" "brew"
+	require "trash" "brew reinstall trash-cli" "brew"
+		require "trash-empty" "brew reinstall trash-cli" "brew"
+	require "wp" "brew reinstall wp-cli" "brew"
+	require "composer" "brew reinstall composer" "brew"
+	require "hcl" "gem install hcl && hcl config -r"
+	require "slack" "brew tap rockymadden/rockymadden && brew reinstall rockymadden/rockymadden/slack-cli && slack init"
+	require "fzf" "brew reinstall fzf" "brew"
+	require "nativefier" "brew reinstall nativefier" "brew"
+	require "python" "brew reinstall python" "brew"
+		require "rainbow" "easy_install rainbow" "easy_install" # Colorize less.
+	require "npm" "brew reinstall node" "brew" # Also installs node.
+	require "git" "brew reinstall git" "brew"
+	require "watch" "brew reinstall watch" "brew"
+	require "watchexec" "brew reinstall watchexec" "brew"
+	require "ffmpeg" "brew reinstall ffmpeg" "brew"
+		require "gifify" "brew reinstall gifify" "brew"
 
 ###
  # Aliases
  #
- # @since Thursday, 10/1/2020
+ # @since Thursday, 10/1/2020 Moved over from .config
  ##
 alias edit="subl -n"
 alias v="vcsh"
