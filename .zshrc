@@ -1,3 +1,8 @@
+#!/bin/zsh
+
+# Make sure keys and identities make it into keychain.
+ssh-add -q -A -k >/dev/null 2>&1
+
 ###
  # PATH
  #
@@ -30,6 +35,7 @@ export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig" # For pkg-config to find openssl@1.1 you may need to set:
 export LESS="-F -X $LESS" # Don't pager on less.
 export MANPAGER='ul | cat -s'
+export COMPOSER_PROCESS_TIMEOUT=15 # Fail after 15 seconds.
 
 ###
  # Enable history between panels.
@@ -148,6 +154,8 @@ ZSH_THEME="ys"
  ##
 source $ZSH/oh-my-zsh.sh
 
+# export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
+
 ###
  # Antigen Plugin Manager
  #
@@ -169,41 +177,46 @@ else
 	antigen bundle osx # Builtin
 	antigen bundle z # Builtin
 	antigen bundle Tarrasch/zsh-bd
-	antigen bundle aubreypwd/zsh-plugin-x
-	antigen bundle aubreypwd/zsh-plugin-reload
-	antigen bundle aubreypwd/zsh-plugin-require
-	antigen bundle aubreypwd/zsh-plugin-fzf-git-branch
-	antigen bundle aubreypwd/zsh-plugin-tdl
-	antigen bundle aubreypwd/zsh-plugin-hide
-	antigen bundle aubreypwd/zsh-plugin-delete
-	antigen bundle aubreypwd/zsh-plugin-comment
-	antigen bundle aubreypwd/zsh-plugin-pwdcp
-	antigen bundle aubreypwd/zsh-plugin-cvideo
+
+	# My Plugins:
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-x
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-reload
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fzf-git-branch
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-tdl
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-hide
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-delete
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-comment
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-pwdcp
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-cvideo
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-yt2mp3
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fd
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-download
+	antigen bundle ssh://git@github.com/WebDevStudios/zsh-plugin-satisbuild.git
 
 	antigen apply
 fi
 
 require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
-require "ffmpeg" "brew reinstall ffmpeg"
 require "wget" "brew reinstall wget"
 require "curl" "brew reinstall curl"
 require "svn" "brew reinstall subversion"
 require "trash" "brew reinstall trash-cli"
-require "trash-empty" "brew reinstall trash-cli"
+	require "trash-empty" "brew reinstall trash-cli"
 require "wp" "brew reinstall wp-cli"
-require "youtube-dl" "brew reinstall youtube-dl"
 require "composer" "brew reinstall composer"
 require "hcl" "gem install hcl && hcl config -r"
 require "slack" "brew tap rockymadden/rockymadden && brew reinstall rockymadden/rockymadden/slack-cli && slack init"
 require "fzf" "brew reinstall fzf"
 require "nativefier" "brew reinstall nativefier"
-require "rainbow" "brew reinstall python && sudo easy_install rainbow" # Colorize less.
-require "npm" "brew reinstall node@10.16.1"
-require "git" "brew reinstall git"
-require "hcl" "gem install hcl"
-require "git-open" "npm install --global git-open"
-require "watch" "brew reinstall watch"
 require "python" "brew reinstall python"
+	require "rainbow" "easy_install rainbow" # Colorize less.
+require "npm" "brew reinstall node" # Also installs node.
+require "git" "brew reinstall git"
+require "watch" "brew reinstall watch"
+require "watchexec" "brew reinstall watchexec"
+require "ffmpeg" "brew reinstall ffmpeg"
+	require "gifify" "brew reinstall gifify"
 
 ###
  # Aliases
