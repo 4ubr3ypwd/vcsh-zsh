@@ -95,9 +95,10 @@ if [[ ! -f "/usr/local/bin/ghq" ]]; then
 	echo "Please install ghq and reload to install persistent repos:"
 	echo "  brew install ghq"
 else
-	ghq get git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
-	ghq get git@github.com:aubreypwd/system.git &> /dev/null
-	ghq get git@github.com:aubreypwd/iTerm2.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/config.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/iTerm2.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/aubreypwd.github.io-hugo.git &> /dev/null
 fi
 
 ###
@@ -202,21 +203,22 @@ if [[ ! -f "/usr/local/share/antigen/antigen.zsh" ]]; then
 else
 	source /usr/local/share/antigen/antigen.zsh # brew install antigen
 
-	antigen bundle git # Builtin
-	antigen bundle wp-cli # Builtin
-	antigen bundle svn # Builtin
-	antigen bundle git-extras # Builtin
-	antigen bundle history-substring-search # Builtin
-	antigen bundle osx # Builtin
-	antigen bundle z # Builtin
+	# Builtin:
+	antigen bundle git
+	antigen bundle wp-cli
+	antigen bundle svn
+	antigen bundle git-extras
+	antigen bundle history-substring-search
+	antigen bundle osx
+	antigen bundle z
+
+	# Others:
 	antigen bundle Tarrasch/zsh-bd
 
 	# My Plugins:
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-x
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-reload
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require
-		# export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
-
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require # export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fzf-git-branch
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-tdl
 	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-hide
