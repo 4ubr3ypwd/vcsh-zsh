@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Don't show last login message anymore.
+# Don't show last login message, e.g. you have mail, etc.
 touch "$HOME/.hushlogin"
 
 # Make sure keys and identities make it into keychain.
@@ -29,25 +29,29 @@ export PATH="/usr/local/opt/openssl@1.1/bin:$PATH" # If you need to have openssl
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 
 ###
- # For compilers to find openssl@1.1 you may need to set:
+ # Nobs for compilers to find openssl@1.1
  #
  # @since Thursday, 10/1/2020
  ##
-export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig" # For pkg-config to find openssl@1.1 you may need to set:
-export LESS="-F -X $LESS" # Don't pager on less.
-export MANPAGER='ul | cat -s'
+
+###
+ # Misc Nobs
+ #
+ # @since Friday, 10/2/2020
+ ##
 export COMPOSER_PROCESS_TIMEOUT=15 # Fail after 15 seconds.
+export LESS="-F -X $LESS" # Don't pager on less.
+export MANPAGER='ul | cat -s' # Don't use less.
 
 ###
  # macOS Default Flags
  #
- # Note, if you modify please delete the $flagfile
- #
  # @since Thursday, 10/1/2020
  ##
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write com.apple.TextEdit SmartQuotes -bool false
@@ -65,15 +69,18 @@ defaults write com.apple.dock static-only -bool false # Only show running apps i
 defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
 
 ###
- # Make sure that Greenshot Screenshots make it to the ~/Pictures/Screenshots/Greenshot folder.
+ # Configure Greenshots Screenshots Location
+ #
+ # Make sure that Greenshot Screenshots make it to:
+ #
+ #     ~/Pictures/Screenshots/Greenshot
  #
  # @since Thursday, 10/1/2020
  ##
 [[ -d "$HOME/Pictures/Greenshot" ]] || $(
-	mkdir -p "$HOME/Pictures/Screenshots/Greenshot"
-	ln -sf "$HOME/Pictures/Screenshots/Greenshot" "$HOME/Pictures/Greenshot"
+	mkdir -p "$HOME/Pictures/Screenshots/Greenshot" # Where we want screenshots to go
+	ln -sf "$HOME/Pictures/Screenshots/Greenshot" "$HOME/Pictures/Greenshot" # Link Greenshot's default location to the new one.
 )
-
 
 ###
  # Enable history between panels.
@@ -82,24 +89,6 @@ defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non
  ##
 unsetopt inc_append_history
 unsetopt share_history
-
-###
- # ghq Repositories
- #
- # For repositories you want to persist on your system, add them below.
- # This uses ghq to try and (silently) install repositories you want installed.
- #
- # @since Wednesday, 9/23/2020
- ##
-if [[ ! -f "/usr/local/bin/ghq" ]]; then
-	echo "Please install ghq and reload to install persistent repos:"
-	echo "  brew install ghq"
-else
-	ghq get -p -s git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
-	ghq get -p -s git@github.com:aubreypwd/config.git &> /dev/null
-	ghq get -p -s git@github.com:aubreypwd/iTerm2.git &> /dev/null
-	ghq get -p -s git@github.com:aubreypwd/aubreypwd.github.io-hugo.git &> /dev/null
-fi
 
 ###
  # Load a .zshrc file that you aren't tracking in VCS.
@@ -159,25 +148,25 @@ chflags nohidden "$HOME/Library"
  ##
 if [ ! -e "$ZSH" ]; then
 	echo ".oh-my-zsh isn't installed!"
-	echo "  https://ohmyz.sh/#install"
-	exit;
+	echo "  Install: https://ohmyz.sh/#install"
+	return
 fi
 
 ###
  # Builtin Plugins
  #
- # Must be done before you shource oh-my-zsh.
+ # - Must be done before you shource oh-my-zsh.
  #
  # @since 10/1/20
  ##
 plugins=(
-	aubreypwd # Should be symlinked to .config
+	aubreypwd # Should be symlinked to .config (will go away soon)
 )
 
 ###
  # Theme
  #
- # Must be done before you shource oh-my-zsh.
+ # - Must be done before you shource oh-my-zsh.
  #
  # @since Monday, 9/21/2020 frisk
  # @since 10/1/20           ys
@@ -187,6 +176,8 @@ ZSH_THEME="ys"
 ###
  # Load oh-my-zsh now that it's been configured.
  #
+ # - Should happen AFTER plugins and theme's are defined.
+ #
  # @since Thursday, 10/1/2020
  ##
 source $ZSH/oh-my-zsh.sh
@@ -194,7 +185,15 @@ source $ZSH/oh-my-zsh.sh
 ###
  # Antigen Plugin Manager
  #
- # @see https://github.com/zsh-users/antigen
+ # I use Antigen to source my various zsh functions and aliases.
+ #
+ # - Think of "bundle" as "plugin".
+ # - E.g. `Tarrasch/zsh-bd` should clone from Github by default
+ # - Cloning using ssh URL ensures the resutling clone is contributable upstream with 2FA
+ #
+ # @see   $HOME/.antigen/bundle                 Where the repos are cloned and sourced from.
+ # @see   https://github.com/zsh-users/antigen  Antigen download and info.
+ #
  # @since Monday, 9/21/2020
  ##
 if [[ ! -f "/usr/local/share/antigen/antigen.zsh" ]]; then
@@ -239,31 +238,93 @@ fi
 ###
  # Required Commands
  #
- # @see   https://github.com/aubreypwd/zsh-plugin-require Uses this bundle to run require function/command.
+ # - Note, if antigen above hasn't installed yet, a reload will install require and install the below.
  #
- # @since Friday, 10/2/2020 The initial ones.
+ # @see   https://github.com/aubreypwd/zsh-plugin-require Uses this bundle to run require function/command.
+ # @since Friday, 10/2/2020                               The initial ones.
  ##
-require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
-	require "curl" "brew reinstall curl"  "brew"
-	require "wget" "brew reinstall wget" "brew"
-	require "svn" "brew reinstall subversion" "brew"
-	require "trash" "brew reinstall trash-cli" "brew"
-		require "trash-empty" "brew reinstall trash-cli" "brew"
-	require "wp" "brew reinstall wp-cli" "brew"
-	require "composer" "brew reinstall composer" "brew"
-	require "hcl" "gem install hcl && hcl config -r"
-	require "slack" "brew tap rockymadden/rockymadden && brew reinstall rockymadden/rockymadden/slack-cli && slack init"
-	require "fzf" "brew reinstall fzf" "brew"
-	require "nativefier" "brew reinstall nativefier" "brew"
-	require "python" "brew reinstall python" "brew"
-		require "rainbow" "easy_install rainbow" "easy_install" # Colorize less.
+if [[ ! $( command -v require ) ]]; then
+	echo "Could not find the 'require' function."
+	echo "  Please install: https://github.com/aubreypwd/zsh-plugin-require"
+else
+
+	###
+	 # Install homebrew.
+	 #
+	 # E.g: brew
+	 #
+	 # @since Friday, 10/2/2020
+	 # @see   https://brew.sh
+	 ##
+	require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
+
+	###
+	 # Install package managers from homebrew.
+	 #
+	 # Also installs gem
+	 #
+	 # @since Friday, 10/2/2020
+	 ##
+	require "composer" "brew reinstall composer" "brew" # Composer, @see https://composer.org
 	require "npm" "brew reinstall node" "brew" # Also installs node.
+	require "python" "brew reinstall python" "brew" # Installs pip3 and easy_install
+	require "ruby" "brew reinstall ruby" "brew" # Installs gem
+
+	###
+	 # Install repo managers.
+	 #
+	 # @since Friday, 10/2/2020
+	 ##
+	require "ghq" "brew reinstall ghq" "brew"
+	require "vcsh" "brew reinstall vcsh" "brew"
+
+	###
+	 # Homebrew Requirements
+	 #
+	 # @since Friday, 10/2/2020
+	 # @see   https://brew.sh
+	 ##
+	require "curl" "brew reinstall curl"  "brew"
 	require "git" "brew reinstall git" "brew"
+	require "svn" "brew reinstall subversion" "brew"
+	require "ffmpeg" "brew reinstall ffmpeg" "brew"
+	require "fzf" "brew reinstall fzf" "brew"
+	require "gifify" "brew reinstall gifify" "brew"
+	require "nativefier" "brew reinstall nativefier" "brew"
+	require "slack" "brew tap rockymadden/rockymadden && brew reinstall rockymadden/rockymadden/slack-cli && slack init"
+	require "trash" "brew reinstall trash-cli" "brew"
+	require "trash-empty" "brew reinstall trash-cli" "brew"
 	require "watch" "brew reinstall watch" "brew"
 	require "watchexec" "brew reinstall watchexec" "brew"
-	require "ffmpeg" "brew reinstall ffmpeg" "brew"
-		require "gifify" "brew reinstall gifify" "brew"
-	require "vcsh" "brew reinstall vcsh" "brew"
+	require "wget" "brew reinstall wget" "brew"
+	require "wp" "brew reinstall wp-cli" "brew"
+
+	###
+	 # Non-homebrew Requirements
+	 #
+	 # @since Friday, 10/2/2020
+	 ##
+	require "hcl" "gem install hcl && hcl config -r"
+	require "rainbow" "easy_install rainbow" "easy_install" # Colorize less.
+fi
+
+###
+ # ghq Persistent Repositories
+ #
+ # For repositories you want to persist on your system, add them below.
+ # This uses ghq to try and (silently) install repositories you want installed.
+ #
+ # @since Wednesday, 9/23/2020
+ ##
+if [[ ! $( command -v ghq ) ]]; then
+	echo "Please install ghq and reload to install persistent repos:"
+	echo "  Homebrew: brew install ghq"
+else
+	ghq get -p -s git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/config.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/iTerm2.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/aubreypwd.github.io-hugo.git &> /dev/null
+fi
 
 ###
  # Require VCSH Repositories
