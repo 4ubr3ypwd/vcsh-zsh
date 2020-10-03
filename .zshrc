@@ -334,6 +334,7 @@ fi
  ##
 if [[ ! $( command -v vcsh ) ]]; then
 	echo "Could not find command 'vcsh', please reinstall and reload."
+	echo "  Homebrew: brew require vcsh"
 else
 	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh
 	vcshr "choosy" "aubreypwd" "vcsh-choosy" --overwrite --autoignore --ssh
