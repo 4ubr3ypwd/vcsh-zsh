@@ -140,6 +140,7 @@ export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
  ##
 chflags hidden "$HOME/Applications"
 chflags nohidden "$HOME/Library"
+chflags hidden "$HOME/Brewfile"
 
 ###
  # Bail if oh-my-zsh isn't installed yet.
