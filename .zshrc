@@ -95,7 +95,7 @@ unsetopt share_history
  #
  # @since Thursday, 10/1/2020
  ##
-if [ -e "$HOME/.zshrc.secure" ]; then
+if [ -f "$HOME/.zshrc.secure" ]; then
 	source "$HOME/.zshrc.secure"
 fi
 
