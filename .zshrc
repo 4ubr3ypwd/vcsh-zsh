@@ -162,15 +162,16 @@ plugins=(
  #
  # @since Monday, 9/21/2020 frisk
  # @since 10/1/20           ys
+ # @since Wednesday, 10/7/2020 Switched to refined for more simplicity.
  ##
-ZSH_THEME="ys"
+ZSH_THEME="refined"
 
 ###
  # Load oh-my-zsh now that it's been configured.
  #
  # - Should happen AFTER plugins and theme's are defined.
  #
- # @since Thursday, 10/1/2020
+ # @since Thursday, 10/1/2020 Added
  ##
 source $ZSH/oh-my-zsh.sh
 
