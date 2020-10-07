@@ -38,15 +38,6 @@ export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig" # For pkg-config to find openssl@1.1 you may need to set:
 
 ###
- # Misc Nobs
- #
- # @since Friday, 10/2/2020
- ##
-export COMPOSER_PROCESS_TIMEOUT=15 # Fail after 15 seconds.
-export LESS="-F -X $LESS" # Don't pager on less.
-export MANPAGER='ul | cat -s' # Don't use less.
-
-###
  # macOS Default Flags
  #
  # @since Thursday, 10/1/2020
@@ -365,3 +356,12 @@ alias ci="composer install --prefer-source"
 alias cid="composer install --prefer-dist"
 alias cr="composer uninstall; composer install"
 alias cri="composer uninstall; composer install --prefer-source"
+
+###
+ # Misc Nobs
+ #
+ # @since Friday, 10/2/2020
+ ##
+export COMPOSER_PROCESS_TIMEOUT=15 # Fail after 15 seconds.
+export LESS="-F -X $LESS" # Don't pager on less.
+export MANPAGER='ul | cat -s' # Don't use less.
