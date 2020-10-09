@@ -357,6 +357,9 @@ alias ci="composer install --prefer-source"
 alias cid="composer install --prefer-dist"
 alias cr="composer uninstall; composer install"
 alias cri="composer uninstall; composer install --prefer-source"
+alias fdd="fd 2"
+alias fd3="fd 3"
+alias fd!="fd 5"
 
 ###
  # Misc Nobs
