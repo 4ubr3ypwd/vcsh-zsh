@@ -361,6 +361,7 @@ alias fdd="fd 2"
 alias fd3="fd 3"
 alias fd!="fd 5"
 alias vim="vim -c 'startinsert'"
+alias repo="cd ~/Repos && fdd"
 
 ###
  # Misc Nobs
