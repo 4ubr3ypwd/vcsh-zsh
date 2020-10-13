@@ -360,6 +360,7 @@ alias cri="composer uninstall; composer install --prefer-source"
 alias fdd="fd 2"
 alias fd3="fd 3"
 alias fd!="fd 5"
+alias vim="vim -c 'startinsert'"
 
 ###
  # Misc Nobs
