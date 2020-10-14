@@ -352,16 +352,22 @@ alias v="vcsh"
 alias ls='ls -laGFh'
 alias c=clear
 alias tower='gittower'
+
+# Easy composer commands.
 alias cu="composer uninstall"
 alias ci="composer install --prefer-source"
 alias cid="composer install --prefer-dist"
 alias cr="composer uninstall; composer install"
 alias cri="composer uninstall; composer install --prefer-source"
-alias fdd="fd 2"
-alias fd3="fd 3"
-alias fd!="fd 5"
-alias vim="vim -c 'startinsert'"
-alias repo="cd ~/Repos && fdd"
+
+# Fuzzy find at certain levels easily.
+alias fdd="fd 2" # Two levels.
+alias fd!="fd 5" # Deep, 5 levels.
+alias fd~="fd 50" # Super deep.
+
+alias vim="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
+alias repo="cd ~/Repos && fdd" # An easy way to get to a repo using my ffd command.
+alias n='echo "node --version: $(node --version)"' # An easy way to figure out which version I'm using
 
 ###
  # Misc Nobs
