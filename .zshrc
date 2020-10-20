@@ -11,10 +11,10 @@ ssh-add -q -A -k >/dev/null 2>&1
  #
  # @since Thursday, 10/1/2020
  ##
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:$PATH"
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
-export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/lib/node_modules:$PATH"
@@ -374,6 +374,6 @@ alias n='echo "node --version: $(node --version)"' # An easy way to figure out w
  #
  # @since Friday, 10/2/2020
  ##
-export COMPOSER_PROCESS_TIMEOUT=15 # Fail after 15 seconds.
+export COMPOSER_PROCESS_TIMEOUT=60 # Fail after x seconds.
 export LESS="-F -X $LESS" # Don't pager on less.
 export MANPAGER='ul | cat -s' # Don't use less.
