@@ -317,6 +317,7 @@ else
 	ghq get -p -s git@github.com:aubreypwd/config.git &> /dev/null
 	ghq get -p -s git@github.com:aubreypwd/iTerm2.git &> /dev/null
 	ghq get -p -s git@github.com:aubreypwd/aubreypwd.github.io-hugo.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/sql-queries.git &> /dev/null
 fi
 
 ###
