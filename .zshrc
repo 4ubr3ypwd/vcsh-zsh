@@ -1,5 +1,12 @@
 #!/bin/zsh
 
+# Make sure that we have our Screenshot folders.
+mkdir -p "$HOME/Pictures/Screenshots/Dropshare"
+mkdir -p "$HOME/Pictures/Screenshots/Greenshot"
+mkdir -p "$HOME/Pictures/Screenshots/Licecap"
+mkdir -p "$HOME/Pictures/Screenshots/macOS"
+mkdir -p "$HOME/Movies/Zoom"
+
 # Don't show last login message, e.g. you have mail, etc.
 touch "$HOME/.hushlogin"
 
@@ -131,7 +138,7 @@ export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
  ##
 chflags hidden "$HOME/Applications"
 chflags nohidden "$HOME/Library"
-chflags hidden "$HOME/Brewfile"
+chflags hidden "$HOME/.Brewfile"
 
 ###
  # Bail if oh-my-zsh isn't installed yet.
