@@ -385,3 +385,6 @@ alias n='echo "node --version: $(node --version)"' # An easy way to figure out w
 export COMPOSER_PROCESS_TIMEOUT=60 # Fail after x seconds.
 export LESS="-F -X $LESS" # Don't pager on less.
 export MANPAGER='ul | cat -s' # Don't use less.
+
+# Use Composer Version 2 for now...
+composer self-update --1 &> /dev/null
