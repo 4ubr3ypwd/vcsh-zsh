@@ -1,17 +1,18 @@
 #!/bin/zsh
+setopt no_monitor # For commands below eding in &, do not report done when running in background.
 
 # Make sure that we have our Screenshot folders.
-mkdir -p "$HOME/Pictures/Screenshots/Dropshare"
-mkdir -p "$HOME/Pictures/Screenshots/Greenshot"
-mkdir -p "$HOME/Pictures/Screenshots/Licecap"
-mkdir -p "$HOME/Pictures/Screenshots/macOS"
-mkdir -p "$HOME/Movies/Zoom"
+mkdir -p "$HOME/Pictures/Screenshots/Dropshare" &> /dev/null &
+mkdir -p "$HOME/Pictures/Screenshots/Greenshot" &> /dev/null &
+mkdir -p "$HOME/Pictures/Screenshots/Licecap" &> /dev/null &
+mkdir -p "$HOME/Pictures/Screenshots/macOS" &> /dev/null &
+mkdir -p "$HOME/Movies/Zoom" &> /dev/null &
 
 # Don't show last login message, e.g. you have mail, etc.
 touch "$HOME/.hushlogin"
 
 # Make sure keys and identities make it into keychain.
-ssh-add -q -A -k >/dev/null 2>&1
+ssh-add -q -A -k &> /dev/null &
 
 ###
  # PATH
@@ -49,22 +50,23 @@ export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig" # For pkg-conf
  #
  # @since Thursday, 10/1/2020
  ##
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-defaults write com.apple.TextEdit SmartQuotes -bool false
-defaults write com.apple.TextEdit SmartDashes -bool false
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-defaults write com.dteoh.SlowQuitApps invertList -bool YES # Make whitelist a blacklist
-defaults write com.dteoh.SlowQuitApps delay -int 1000 # On whitelisted apps, quit after 3 seconds
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true &> /dev/null &
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false &> /dev/null &
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false &> /dev/null &
+defaults write com.apple.TextEdit SmartQuotes -bool false &> /dev/null &
+defaults write com.apple.TextEdit SmartDashes -bool false &> /dev/null &
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false &> /dev/null &
+defaults write com.dteoh.SlowQuitApps invertList -bool YES &> /dev/null & # Make whitelist a blacklist
+defaults write com.dteoh.SlowQuitApps delay -int 1000 &> /dev/null & # On whitelisted apps, quit after 3 seconds
 defaults write com.apple.screencapture location "$screenshots_dir"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-defaults write com.apple.Finder QuitMenuItem 1 # Add quit to Finder
-defaults write com.apple.dock springboard-columns -int 7 && defaults write com.apple.dock springboard-rows -int 7 # Launchpad Grid
-defaults write com.apple.Dock autohide-delay -float 0 # Show dock after X seconds, e.g. 99 could hide it.
-defaults write com.apple.dock showhidden -bool false # When Apps are hidden, dim them in Dock.
-defaults write com.apple.dock static-only -bool false # Only show running apps in Dock (when set to true)
-defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
+defaults write com.apple.Finder QuitMenuItem 1 &> /dev/null & # Add quit to Finder
+defaults write com.apple.dock springboard-columns -int 7
+defaults write com.apple.dock springboard-rows -int 7 &> /dev/null & # Launchpad Grid
+defaults write com.apple.Dock autohide-delay -float 0 &> /dev/null & # Show dock after X seconds, e.g. 99 could hide it.
+defaults write com.apple.dock showhidden -bool false &> /dev/null & # When Apps are hidden, dim them in Dock.
+defaults write com.apple.dock static-only -bool false &> /dev/null & # Only show running apps in Dock (when set to true)
+defaults write com.googlecode.iterm2 "Secure Input" 0 &> /dev/null & # Tell iterm2 to allow non-secure input for escape
 
 ###
  # Configure Greenshots Screenshots Location
@@ -78,7 +80,7 @@ defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non
 [[ -d "$HOME/Pictures/Greenshot" ]] || $(
 	mkdir -p "$HOME/Pictures/Screenshots/Greenshot" # Where we want screenshots to go
 	ln -sf "$HOME/Pictures/Screenshots/Greenshot" "$HOME/Pictures/Greenshot" # Link Greenshot's default location to the new one.
-)
+) &> /dev/null &
 
 ###
  # Enable history between panels.
@@ -102,7 +104,7 @@ fi
  #
  # @since Monday, 9/21/2020
  ##
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" &> /dev/null &
 
 ###
  # Terminus for Sublime Text 3 Support
@@ -110,8 +112,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
  # @since Monday, 9/21/2020
  ##
 if [ "$TERM_PROGRAM" = "Terminus-Sublime" ]; then
-	bindkey "\e[1;3C" forward-word
-	bindkey "\e[1;3D" backward-word
+	bindkey "\e[1;3C" forward-word &> /dev/null &
+	bindkey "\e[1;3D" backward-word &> /dev/null &
 fi
 
 ###
@@ -119,7 +121,7 @@ fi
  #
  # @since Thursday, 10/1/2020
  ##
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh &> /dev/null &
 
 ###
  # ZSH & oh-my-zsh Specific Configs
@@ -136,9 +138,9 @@ export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
  #
  # @since Thursday, 10/1/2020
  ##
-chflags hidden "$HOME/Applications"
-chflags nohidden "$HOME/Library"
-chflags hidden "$HOME/.Brewfile"
+chflags hidden "$HOME/Applications" &> /dev/null &
+chflags nohidden "$HOME/Library" &> /dev/null &
+chflags hidden "$HOME/.Brewfile" &> /dev/null &
 
 ###
  # Bail if oh-my-zsh isn't installed yet.
@@ -203,34 +205,34 @@ else
 	source /usr/local/share/antigen/antigen.zsh # brew install antigen
 
 	# Builtin:
-	antigen bundle git
-	antigen bundle wp-cli
-	antigen bundle svn
-	antigen bundle git-extras
-	antigen bundle history-substring-search
-	antigen bundle osx
-	antigen bundle z
+	antigen bundle git &> /dev/null &
+	antigen bundle wp-cli &> /dev/null &
+	antigen bundle svn &> /dev/null &
+	antigen bundle git-extras &> /dev/null &
+	antigen bundle history-substring-search &> /dev/null &
+	antigen bundle osx &> /dev/null &
+	antigen bundle z &> /dev/null &
 
 	# Others:
-	antigen bundle Tarrasch/zsh-bd
+	antigen bundle Tarrasch/zsh-bd &> /dev/null &
 
 	# My Plugins:
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-x
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-reload
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require # export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fzf-git-branch
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-tdl
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-hide
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-delete
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-comment
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-pwdcp
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-cvideo
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-yt2mp3
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fd
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-download
-	antigen bundle ssh://git@github.com/WebDevStudios/zsh-plugin-satisbuild.git
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-bruse.git
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-vcshr.git
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-x &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-reload &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require &> /dev/null & # export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fzf-git-branch &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-tdl &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-hide &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-delete &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-comment &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-pwdcp &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-cvideo &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-yt2mp3 &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fd &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-download &> /dev/null &
+	antigen bundle ssh://git@github.com/WebDevStudios/zsh-plugin-satisbuild.git &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-bruse.git &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-vcshr.git &> /dev/null &
 
 	antigen apply
 fi
@@ -256,7 +258,7 @@ else
 	 # @since Friday, 10/2/2020
 	 # @see   https://brew.sh
 	 ##
-	require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
+	require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"' &> /dev/null &
 
 	###
 	 # Install package managers from homebrew.
@@ -265,18 +267,18 @@ else
 	 #
 	 # @since Friday, 10/2/2020
 	 ##
-	require "composer" "brew reinstall composer" "brew" # Composer, @see https://composer.org
-	require "npm" "brew reinstall node" "brew" # Also installs node.
-	require "python" "brew reinstall python" "brew" # Installs pip3 and easy_install
-	require "ruby" "brew reinstall ruby" "brew" # Installs gem
+	require "composer" "brew reinstall composer" "brew" &> /dev/null & # Composer, @see https://composer.org
+	require "npm" "brew reinstall node" "brew" &> /dev/null & # Also installs node.
+	require "python" "brew reinstall python" "brew" &> /dev/null & # Installs pip3 and easy_install
+	require "ruby" "brew reinstall ruby" "brew" &> /dev/null & # Installs gem
 
 	###
 	 # Install repo managers.
 	 #
 	 # @since Friday, 10/2/2020
 	 ##
-	require "ghq" "brew reinstall ghq" "brew"
-	require "vcsh" "brew reinstall vcsh" "brew"
+	require "ghq" "brew reinstall ghq" "brew" &> /dev/null &
+	require "vcsh" "brew reinstall vcsh" "brew" &> /dev/null &
 
 	###
 	 # Homebrew Requirements
@@ -284,28 +286,28 @@ else
 	 # @since Friday, 10/2/2020
 	 # @see   https://brew.sh
 	 ##
-	require "curl" "brew reinstall curl"  "brew"
-	require "git" "brew reinstall git" "brew"
-	require "svn" "brew reinstall subversion" "brew"
-	require "ffmpeg" "brew reinstall ffmpeg" "brew"
-	require "fzf" "brew reinstall fzf" "brew"
-	require "gifify" "brew reinstall gifify" "brew"
-	require "nativefier" "brew reinstall nativefier" "brew"
-	require "slack" "brew tap rockymadden/rockymadden && brew reinstall rockymadden/rockymadden/slack-cli && slack init"
-	require "trash" "brew reinstall trash-cli" "brew"
-	require "trash-empty" "brew reinstall trash-cli" "brew"
-	require "watch" "brew reinstall watch" "brew"
-	require "watchexec" "brew reinstall watchexec" "brew"
-	require "wget" "brew reinstall wget" "brew"
-	require "wp" "brew reinstall wp-cli" "brew"
+	require "curl" "brew reinstall curl"  "brew" &> /dev/null &
+	require "git" "brew reinstall git" "brew" &> /dev/null &
+	require "svn" "brew reinstall subversion" "brew" &> /dev/null &
+	require "ffmpeg" "brew reinstall ffmpeg" "brew" &> /dev/null &
+	require "fzf" "brew reinstall fzf" "brew" &> /dev/null &
+	require "gifify" "brew reinstall gifify" "brew" &> /dev/null &
+	require "nativefier" "brew reinstall nativefier" "brew" &> /dev/null &
+	require "slack" "brew tap rockymadden/rockymadden && brew reinstall rockymadden/rockymadden/slack-cli && slack init" &> /dev/null &
+	require "trash" "brew reinstall trash-cli" "brew" &> /dev/null &
+	require "trash-empty" "brew reinstall trash-cli" "brew" &> /dev/null &
+	require "watch" "brew reinstall watch" "brew" &> /dev/null &
+	require "watchexec" "brew reinstall watchexec" "brew" &> /dev/null &
+	require "wget" "brew reinstall wget" "brew" &> /dev/null &
+	require "wp" "brew reinstall wp-cli" "brew" &> /dev/null &
 
 	###
 	 # Non-homebrew Requirements
 	 #
 	 # @since Friday, 10/2/2020
 	 ##
-	require "hcl" "gem install hcl && hcl config -r"
-	require "rainbow" "easy_install rainbow" "easy_install" # Colorize less.
+	require "hcl" "gem install hcl && hcl config -r" &> /dev/null &
+	require "rainbow" "easy_install rainbow" "easy_install" &> /dev/null & # Colorize less.
 fi
 
 ###
@@ -320,11 +322,11 @@ if [[ ! $( command -v ghq ) ]]; then
 	echo "Please install ghq and reload to install persistent repos:"
 	echo "  Homebrew: brew install ghq"
 else
-	ghq get -p -s git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null
-	ghq get -p -s git@github.com:aubreypwd/config.git &> /dev/null
-	ghq get -p -s git@github.com:aubreypwd/iTerm2.git &> /dev/null
-	ghq get -p -s git@github.com:aubreypwd/aubreypwd.github.io-hugo.git &> /dev/null
-	ghq get -p -s git@github.com:aubreypwd/sql-queries.git &> /dev/null
+	ghq get -p -s git@github.com:aubreypwd/Alfred.alfredpreferences.git &> /dev/null &
+	ghq get -p -s git@github.com:aubreypwd/config.git &> /dev/null &
+	ghq get -p -s git@github.com:aubreypwd/iTerm2.git &> /dev/null &
+	ghq get -p -s git@github.com:aubreypwd/aubreypwd.github.io-hugo.git &> /dev/null &
+	ghq get -p -s git@github.com:aubreypwd/sql-queries.git &> /dev/null &
 fi
 
 ###
@@ -337,17 +339,17 @@ if [[ ! $( command -v vcsh ) ]]; then
 	echo "Could not find command 'vcsh', please reinstall and reload."
 	echo "  Homebrew: brew require vcsh"
 else
-	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh
-	vcshr "choosy" "aubreypwd" "vcsh-choosy" --overwrite --autoignore --ssh
-	vcshr "composer" "aubreypwd" "vcsh-composer" --overwrite --autoignore --ssh
-	vcshr "git" "aubreypwd" "vcsh-git" --overwrite --autoignore --ssh
-	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh
-	vcshr "node" "aubreypwd" "vcsh-node" --overwrite --autoignore --ssh
-	vcshr "specktacle" "aubreypwd" "vcsh-specktacle" --overwrite --autoignore --ssh
-	vcshr "sublime-text-3-snippets" "aubreypwd" "vcsh-sublime-text-3-snippets" --overwrite --autoignore --ssh
-	vcshr "sublime-text-3" "aubreypwd" "vcsh-sublime-text-3" --overwrite --autoignore --ssh
-	vcshr "zsh-secure" "aubreypwd" "vcsh-zsh-secure" --overwrite --autoignore --ssh
-	vcshr "zsh" "aubreypwd" "vcsh-zsh" --overwrite --autoignore --ssh
+	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "choosy" "aubreypwd" "vcsh-choosy" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "composer" "aubreypwd" "vcsh-composer" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "git" "aubreypwd" "vcsh-git" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "node" "aubreypwd" "vcsh-node" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "specktacle" "aubreypwd" "vcsh-specktacle" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "sublime-text-3-snippets" "aubreypwd" "vcsh-sublime-text-3-snippets" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "sublime-text-3" "aubreypwd" "vcsh-sublime-text-3" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "zsh-secure" "aubreypwd" "vcsh-zsh-secure" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "zsh" "aubreypwd" "vcsh-zsh" --overwrite --autoignore --ssh &> /dev/null &
 fi
 
 ###
@@ -388,4 +390,4 @@ export LESS="-F -X $LESS" # Don't pager on less.
 export MANPAGER='ul | cat -s' # Don't use less.
 
 # Use Composer Version 2 for now...
-composer self-update --1 &> /dev/null
+composer self-update --1 &> /dev/null &
