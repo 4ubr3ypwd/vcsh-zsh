@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 setopt no_monitor # For commands below eding in &, do not report done when running in background.
 
 # Make sure that we have our Screenshot folders.
@@ -389,5 +390,4 @@ export COMPOSER_PROCESS_TIMEOUT=60 # Fail after x seconds.
 export LESS="-F -X $LESS" # Don't pager on less.
 export MANPAGER='ul | cat -s' # Don't use less.
 
-# Use Composer Version 2 for now...
-composer self-update --1 &> /dev/null &
+composer self-update --1 &> /dev/null & # Use Composer Version 1 for now...
