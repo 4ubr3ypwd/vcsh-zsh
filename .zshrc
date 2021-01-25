@@ -79,9 +79,9 @@ defaults write com.googlecode.iterm2 "Secure Input" 0 &> /dev/null & # Tell iter
  # @since Thursday, 10/1/2020
  ##
 [[ -d "$HOME/Pictures/Greenshot" ]] || $(
-	mkdir -p "$HOME/Pictures/Screenshots/Greenshot" # Where we want screenshots to go
-	ln -sf "$HOME/Pictures/Screenshots/Greenshot" "$HOME/Pictures/Greenshot" # Link Greenshot's default location to the new one.
-) &> /dev/null &
+	# Link Greenshot's default location to the new one.
+	mkdir -p "$HOME/Pictures/Screenshots/Greenshot" && ln -sf "$HOME/Pictures/Screenshots/Greenshot" "$HOME/Pictures/Greenshot" &> /dev/null &
+)
 
 ###
  # Enable history between panels.
@@ -206,34 +206,34 @@ else
 	source /usr/local/share/antigen/antigen.zsh # brew install antigen
 
 	# Builtin:
-	antigen bundle git &> /dev/null &
-	antigen bundle wp-cli &> /dev/null &
-	antigen bundle svn &> /dev/null &
-	antigen bundle git-extras &> /dev/null &
-	antigen bundle history-substring-search &> /dev/null &
-	antigen bundle osx &> /dev/null &
-	antigen bundle z &> /dev/null &
+	antigen bundle git
+	antigen bundle wp-cli
+	antigen bundle svn
+	antigen bundle git-extras
+	antigen bundle history-substring-search
+	antigen bundle osx
+	antigen bundle z
 
 	# Others:
-	antigen bundle Tarrasch/zsh-bd &> /dev/null &
+	antigen bundle Tarrasch/zsh-bd
 
 	# My Plugins:
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-x &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-reload &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require &> /dev/null & # export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fzf-git-branch &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-tdl &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-hide &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-delete &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-comment &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-pwdcp &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-cvideo &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-yt2mp3 &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fd &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-download &> /dev/null &
-	antigen bundle ssh://git@github.com/WebDevStudios/zsh-plugin-satisbuild.git &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-bruse.git &> /dev/null &
-	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-vcshr.git &> /dev/null &
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-x
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-reload
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require  # export REQUIRE_AUTO_INSTALL="off" # Un-comment to disable autoinstall.
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fzf-git-branch
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-tdl
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-hide
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-delete
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-comment
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-pwdcp
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-cvideo
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-yt2mp3
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-fd
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-download
+	antigen bundle ssh://git@github.com/WebDevStudios/zsh-plugin-satisbuild.git
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-bruse.git
+	antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-vcshr.git
 
 	antigen apply
 fi
@@ -287,7 +287,7 @@ else
 	 # @since Friday, 10/2/2020
 	 # @see   https://brew.sh
 	 ##
-	require "curl" "brew reinstall curl"  "brew" &> /dev/null &
+	require "curl" "brew reinstall curl" "brew" &> /dev/null &
 	require "git" "brew reinstall git" "brew" &> /dev/null &
 	require "svn" "brew reinstall subversion" "brew" &> /dev/null &
 	require "ffmpeg" "brew reinstall ffmpeg" "brew" &> /dev/null &
