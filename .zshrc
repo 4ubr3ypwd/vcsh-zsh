@@ -288,6 +288,7 @@ else
 	 # @see   https://brew.sh
 	 ##
 	require "curl" "brew reinstall curl" "brew" &> /dev/null &
+	require "m" "brew reinstall m" "brew" &> /dev/null &
 	require "git" "brew reinstall git" "brew" &> /dev/null &
 	require "svn" "brew reinstall subversion" "brew" &> /dev/null &
 	require "ffmpeg" "brew reinstall ffmpeg" "brew" &> /dev/null &
