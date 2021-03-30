@@ -64,7 +64,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 defaults write com.apple.Finder QuitMenuItem 1 &> /dev/null & # Add quit to Finder
 defaults write com.apple.dock springboard-columns -int 7
 defaults write com.apple.dock springboard-rows -int 7 &> /dev/null & # Launchpad Grid
-defaults write com.apple.Dock autohide-delay -float 0 &> /dev/null & # Show dock after X seconds, e.g. 99 could hide it.
+defaults write com.apple.Dock autohide-delay -float 0 &> /dev/null & # Show dock after X seconds, e.g. 99 co
 defaults write com.apple.dock showhidden -bool false &> /dev/null & # When Apps are hidden, dim them in Dock.
 defaults write com.apple.dock static-only -bool false &> /dev/null & # Only show running apps in Dock (when set to true)
 defaults write com.googlecode.iterm2 "Secure Input" 0 &> /dev/null & # Tell iterm2 to allow non-secure input for escape
@@ -368,9 +368,9 @@ alias tower='gittower'
 # Easy composer commands.
 alias cu="composer uninstall"
 alias ci="composer install --prefer-source"
-alias cid="composer install --prefer-dist"
-alias cr="composer uninstall; composer install"
-alias cri="composer uninstall; composer install --prefer-source"
+alias ci+d="composer install --prefer-dist"
+alias cr+d="composer uninstall; composer install --prefer-dist"
+alias cr+i="composer uninstall; composer install --prefer-source"
 
 # Fuzzy find at certain levels easily.
 alias fdd="fd 2" # Two levels.
@@ -380,7 +380,12 @@ alias goto="fd!" # Just an easier way to get to fd!.
 
 alias vim="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
 alias repo="cd ~/Repos && fdd" # An easy way to get to a repo using my ffd command.
-alias n='echo "node --version: $(node --version)"' # An easy way to figure out which version I'm using
+
+# Node and Composer all the things
+alias cinb="ci && npm i && npm run build"
+alias cinb+w="ciib && npm run watch"
+alias cidnb="cid && npm i && npm run build"
+alias cidnb+w="cdnb && npm run watch"
 
 ###
  # Misc Nobs
