@@ -367,10 +367,10 @@ alias tower='gittower'
 
 # Easy composer commands.
 alias cu="composer uninstall"
-alias ci="composer install --prefer-source"
-alias ci+d="composer install --prefer-dist"
-alias cr+d="composer uninstall; composer install --prefer-dist"
-alias cr+i="composer uninstall; composer install --prefer-source"
+alias ci+s="composer install --prefer-source" # source install.
+alias ci+d="composer install --prefer-dist" # dist install.
+alias cr+d="composer uninstall; composer install --prefer-dist" # reinstall with dist.
+alias cr+s="composer uninstall; composer install --prefer-source" # reinstall with source.
 
 # Fuzzy find at certain levels easily.
 alias fdd="fd 2" # Two levels.
