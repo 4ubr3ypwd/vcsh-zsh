@@ -380,12 +380,12 @@ alias goto="fd!" # Just an easier way to get to fd!.
 
 alias vim="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
 alias repo="cd ~/Repos && fdd" # An easy way to get to a repo using my ffd command.
-alias site="cd ~/Sites/Local && fd" # An easy way to get to a local.
+alias site="cd ~/Sites/Local && fd 3" # An easy way to get to a local.
 
 # npm install's.
 alias npmi+b="n auto && npm i && npm run build"
-alias npmi+w="n auto && npm i && npm run watch"
-alias npmi+b+w="n auto && npm i && npm run build && npm run watch"
+alias npmi+w="n auto && npm i && (npm run dev || npm run watch || npm run start || true)"
+alias npmi+bw="n auto && npm i && npm run build && (npm run dev || npm run watch || npm run start || true)"
 
 ###
  # Misc Nobs
