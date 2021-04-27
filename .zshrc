@@ -80,7 +80,8 @@ defaults write com.googlecode.iterm2 "Secure Input" 0 &> /dev/null & # Tell iter
  ##
 [[ -d "$HOME/Pictures/Greenshot" ]] || $(
 	# Link Greenshot's default location to the new one.
-	mkdir -p "$HOME/Pictures/Screenshots/Greenshot" && ln -sf "$HOME/Pictures/Screenshots/Greenshot" "$HOME/Pictures/Greenshot" &> /dev/null &
+	mkdir -p "$HOME/Pictures/Screenshots/Greenshot" \
+		&& ln -sf "$HOME/Pictures/Screenshots/Greenshot" "$HOME/Pictures/Greenshot" &> /dev/null &
 )
 
 ###
@@ -105,7 +106,8 @@ fi
  #
  # @since Monday, 9/21/2020
  ##
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" &> /dev/null &
+test -e "${HOME}/.iterm2_shell_integration.zsh" \
+	&& source "${HOME}/.iterm2_shell_integration.zsh" &> /dev/null &
 
 ###
  # Terminus for Sublime Text 3 Support
@@ -122,7 +124,8 @@ fi
  #
  # @since Thursday, 10/1/2020
  ##
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh &> /dev/null &
+[ -f ~/.fzf.zsh ] \
+	&& source ~/.fzf.zsh &> /dev/null &
 
 ###
  # ZSH & oh-my-zsh Specific Configs
@@ -332,7 +335,7 @@ else
 fi
 
 ###
- # Require VCSH Repositories
+ # Require VCSH Repositories and ensure ignore is setup for each.
  #
  # @since Friday, 10/2/2020
  # @see https://github.com/aubreypwd/zsh-plugin-vcshr vcshr command.
@@ -341,6 +344,8 @@ if [[ ! $( command -v vcsh ) ]]; then
 	echo "Could not find command 'vcsh', please reinstall and reload."
 	echo "  Homebrew: brew require vcsh"
 else
+
+	# Require each and setup ignore.
 	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "choosy" "aubreypwd" "vcsh-choosy" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "composer" "aubreypwd" "vcsh-composer" --overwrite --autoignore --ssh &> /dev/null &
@@ -348,10 +353,25 @@ else
 	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "node" "aubreypwd" "vcsh-node" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "specktacle" "aubreypwd" "vcsh-specktacle" --overwrite --autoignore --ssh &> /dev/null &
-	vcshr "sublime-text-3-snippets" "aubreypwd" "vcsh-sublime-text-3-snippets" --overwrite --autoignore --ssh &> /dev/null &
-	vcshr "sublime-text-3" "aubreypwd" "vcsh-sublime-text-3" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "st3-snippets" "aubreypwd" "vcsh-st3-snippets" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "st3" "aubreypwd" "vcsh-st3" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "zsh-secure" "aubreypwd" "vcsh-zsh-secure" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "zsh" "aubreypwd" "vcsh-zsh" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "ssh" "aubreypwd" "vcsh-ssh" --overwrite --autoignore --ssh &> /dev/null &
+
+	# Make sure all these auto ignore all files (must add via -f).
+	vcsh write-gitignore homebrew &> /dev/null &
+	vcsh write-gitignore choosy &> /dev/null &
+	vcsh write-gitignore composer &> /dev/null &
+	vcsh write-gitignore git &> /dev/null &
+	vcsh write-gitignore homebrew &> /dev/null &
+	vcsh write-gitignore node &> /dev/null &
+	vcsh write-gitignore specktacle &> /dev/null &
+	vcsh write-gitignore st3-snippets &> /dev/null &
+	vcsh write-gitignore st3 &> /dev/null &
+	vcsh write-gitignore zsh-secure &> /dev/null &
+	vcsh write-gitignore zsh &> /dev/null &
+	vcsh write-gitignore ssh &> /dev/null &
 fi
 
 ###
