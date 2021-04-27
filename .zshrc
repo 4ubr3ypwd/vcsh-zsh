@@ -358,6 +358,7 @@ else
 	vcshr "zsh-secure" "aubreypwd" "vcsh-zsh-secure" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "zsh" "aubreypwd" "vcsh-zsh" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "ssh" "aubreypwd" "vcsh-ssh" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "vim" "aubreypwd" "vcsh-vim" --overwrite --autoignore --ssh &> /dev/null &
 
 	# Make sure all these auto ignore all files (must add via -f).
 	vcsh write-gitignore homebrew &> /dev/null &
@@ -372,6 +373,7 @@ else
 	vcsh write-gitignore zsh-secure &> /dev/null &
 	vcsh write-gitignore zsh &> /dev/null &
 	vcsh write-gitignore ssh &> /dev/null &
+	vcsh write-gitignore vim &> /dev/null &
 fi
 
 ###
