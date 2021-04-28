@@ -386,6 +386,7 @@ alias v="vcsh"
 alias ls='ls -laGFh'
 alias c=clear
 alias tower='gittower'
+alias editzsh="subl ~/.zshrc"
 
 # Easy composer commands.
 alias cu="composer uninstall"
