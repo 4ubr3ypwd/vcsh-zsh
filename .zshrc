@@ -346,11 +346,11 @@ if [[ ! $( command -v vcsh ) ]]; then
 else
 
 	# Require each and setup ignore.
-	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "brew" "aubreypwd" "vcsh-brew" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "choosy" "aubreypwd" "vcsh-choosy" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "composer" "aubreypwd" "vcsh-composer" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "git" "aubreypwd" "vcsh-git" --overwrite --autoignore --ssh &> /dev/null &
-	vcshr "homebrew" "aubreypwd" "vcsh-homebrew" --overwrite --autoignore --ssh &> /dev/null &
+	vcshr "brew" "aubreypwd" "vcsh-brew" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "node" "aubreypwd" "vcsh-node" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "specktacle" "aubreypwd" "vcsh-specktacle" --overwrite --autoignore --ssh &> /dev/null &
 	vcshr "st3-snippets" "aubreypwd" "vcsh-st3-snippets" --overwrite --autoignore --ssh &> /dev/null &
@@ -361,11 +361,10 @@ else
 	vcshr "vim" "aubreypwd" "vcsh-vim" --overwrite --autoignore --ssh &> /dev/null &
 
 	# Make sure all these auto ignore all files (must add via -f).
-	vcsh write-gitignore homebrew &> /dev/null &
+	vcsh write-gitignore brew &> /dev/null &
 	vcsh write-gitignore choosy &> /dev/null &
 	vcsh write-gitignore composer &> /dev/null &
 	vcsh write-gitignore git &> /dev/null &
-	vcsh write-gitignore homebrew &> /dev/null &
 	vcsh write-gitignore node &> /dev/null &
 	vcsh write-gitignore specktacle &> /dev/null &
 	vcsh write-gitignore st3-snippets &> /dev/null &
