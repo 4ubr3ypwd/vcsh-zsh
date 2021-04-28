@@ -386,6 +386,7 @@ alias ls='ls -laGFh'
 alias c=clear
 alias tower='gittower'
 alias editzsh="subl ~/.zshrc"
+alias editgit="subl ~/.gitconfig"
 
 # Easy composer commands.
 alias cu="composer uninstall"
