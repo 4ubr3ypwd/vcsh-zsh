@@ -385,9 +385,9 @@ alias v="vcsh"
 alias ls='ls -laGFh'
 alias c=clear
 alias tower='gittower'
-alias editzsh="subl -n ~/.zshrc"
-alias editgit="subl -n ~/.gitconfig"
-alias editssh="subl -n ~/.ssh/config"
+alias edit+zsh="subl -n ~/.zshrc"
+alias edit+git="subl -n ~/.gitconfig"
+alias edit+ssh="subl -n ~/.ssh/config"
 
 # Easy composer commands.
 alias cu="composer uninstall"
