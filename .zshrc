@@ -412,7 +412,11 @@ alias npmi+w="n auto && npm i && (npm run dev || npm run watch || npm run start 
 alias npmi+bw="n auto && npm i && npm run build && (npm run dev || npm run watch || npm run start || true)"
 
 # Homebrew
-alias dbrew="brew bundle dump --file=$HOME/.Brewfile --verbose --all --describe --force --no-lock && vcsh homebrew diff && vcsh homebrew status" # Dump what's installed to my Brewfile
+alias dbrew="brew bundle dump --file=$HOME/.Brewfile --verbose --all --describe --force --no-lock && vcsh brew diff && vcsh brew status" # Dump what's installed to my Brewfile
+
+# Sounds
+alias bell="tput bel"
+alias b="tput bel"
 
 ###
  # Misc Nobs
