@@ -421,10 +421,10 @@ alias bell="tput bel"
 alias b="tput bel"
 
 # jq
-alias jqn+s"jq .scripts package.json"
-alias jqn+d"jq .dependancies package.json"
-alias jqc+s"jq .scripts composer.json"
-alias jqc+r"jq .require composer.json"
+alias jqn+s="jq .scripts package.json"
+alias jqn+d="jq .dependancies package.json"
+alias jqc+s="jq .scripts composer.json"
+alias jqc+r="jq .require composer.json"
 
 ###
  # Misc Nobs
