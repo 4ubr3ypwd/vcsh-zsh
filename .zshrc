@@ -436,3 +436,12 @@ export LESS="-F -X $LESS" # Don't pager on less.
 export MANPAGER='ul | cat -s' # Don't use less.
 
 composer self-update --1 &> /dev/null & # Use Composer Version 1 for now...
+
+###
+ # Editors.
+ #
+ # @since Thursday, 5/13/2021
+ ##
+export EDITOR='vim'
+export GIT_EDITOR='vim'
+export VISUAL='vim'
