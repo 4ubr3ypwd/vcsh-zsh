@@ -427,6 +427,27 @@ alias jqc+s="jq .scripts composer.json"
 alias jqc+r="jq .require composer.json"
 
 ###
+ # Compress a Video using ffmpeg+crf
+ #
+ # E.g: ffmpeg+compress-video "original-file.mp4" <crf>
+ # E.g: ffmpeg+compress-video "original-file.mp4" 32
+ #
+ # @since Tuesday, 5/18/2021
+ ##
+function ffmpeg+crfv {
+
+	OUT="libx264-crf-$2-$1"
+
+	if [ -z "$2" ]; then
+
+		echo "Please specify crf as 2nd parameter."
+		return
+	fi
+
+	ffmpeg -i "$1" -vcodec libx264 -crf $2 "$OUT"
+}
+
+###
  # Misc Nobs
  #
  # @since Friday, 10/2/2020
