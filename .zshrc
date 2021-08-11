@@ -382,14 +382,18 @@ fi
  # @since Thursday, 10/1/2020 Moved over from .config
  ##
 alias edit="subl -n"
+	alias e="edit"
+	alias editzsh="subl -n ~/.zshrc"
+		alias ezsh="editzsh"
+	alias editgit="subl -n ~/.gitconfig"
+		alias egit="editgit"
+	alias editssh="subl -n ~/.ssh/config"
+		alias essh="editssh"
+
 alias vc="vcsh"
 alias ls='ls -laGFh'
 alias c=clear
 alias tower='gittower'
-
-alias editzsh="subl -n ~/.zshrc"
-alias editgit="subl -n ~/.gitconfig"
-alias editssh="subl -n ~/.ssh/config"
 
 # Easy composer commands.
 alias cu="composer uninstall"
