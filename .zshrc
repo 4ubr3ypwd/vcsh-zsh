@@ -68,6 +68,7 @@ defaults write com.apple.Dock autohide-delay -float 0 &> /dev/null & # Show dock
 defaults write com.apple.dock showhidden -bool false &> /dev/null & # When Apps are hidden, dim them in Dock.
 defaults write com.apple.dock static-only -bool false &> /dev/null & # Only show running apps in Dock (when set to true)
 defaults write com.googlecode.iterm2 "Secure Input" 0 &> /dev/null & # Tell iterm2 to allow non-secure input for escape
+defaults write com.apple.screencapture type jpg # Take jpg screenshots.
 
 ###
  # Configure Greenshots Screenshots Location
@@ -381,22 +382,24 @@ fi
  # @since Thursday, 10/1/2020 Moved over from .config
  ##
 alias edit="subl -n"
-alias v="vcsh"
+alias vc="vcsh"
 alias ls='ls -laGFh'
 alias c=clear
 alias tower='gittower'
-alias edit+zsh="subl -n ~/.zshrc"
-alias edit+git="subl -n ~/.gitconfig"
-alias edit+ssh="subl -n ~/.ssh/config"
+
+alias editzsh="subl -n ~/.zshrc"
+alias editgit="subl -n ~/.gitconfig"
+alias editssh="subl -n ~/.ssh/config"
 
 # Easy composer commands.
 alias cu="composer uninstall"
-alias ci+s="composer install --prefer-source" # source install.
-alias ci+d="composer install --prefer-dist" # dist install.
-alias cr+d="composer uninstall; composer install --prefer-dist" # reinstall with dist.
-alias cr+s="composer uninstall; composer install --prefer-source" # reinstall with source.
+alias cis="composer install --prefer-source" # source install.
+alias cid="composer install --prefer-dist" # dist install.
+alias crd="composer uninstall; composer install --prefer-dist" # reinstall with dist.
+alias crs="composer uninstall; composer install --prefer-source" # reinstall with source.
 alias c@2="composer self-update --2"
 alias c@1="composer self-update --1"
+alias ccc="composer clearcache && composer global clearcache"
 
 # Fuzzy find at certain levels easily.
 alias fdd="fd 2" # Two levels.
@@ -406,25 +409,37 @@ alias goto="fd!" # Just an easier way to get to fd!.
 
 alias vim="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
 alias repo="cd ~/Repos && fdd" # An easy way to get to a repo using my ffd command.
-alias site="cd ~/Sites/Local && fd 3" # An easy way to get to a local.
+
+alias locals="cd ~/Sites/Local && fd 3" # An easy way to get to a local.
+	alias localsite="locals"
 
 # npm install's.
-alias npmi+b="n auto && npm i && npm run build"
-alias npmi+w="n auto && npm i && (npm run dev || npm run watch || npm run start || true)"
-alias npmi+bw="n auto && npm i && npm run build && (npm run dev || npm run watch || npm run start || true)"
+alias npmib="n auto && npm i && npm run build"
+
+# npm install, build, and DEV
+alias npmid="n auto && npm i && (npm run dev || npm run watch || npm run start || true)"
+
+alias npmibd="n auto && npm i && npm run build && (npm run dev || npm run watch || npm run start || true)"
 
 # Homebrew
-alias dbrew="brew bundle dump --file=$HOME/.Brewfile --verbose --all --describe --force --no-lock && vcsh brew diff && vcsh brew status" # Dump what's installed to my Brewfile
+alias brewdump="brew bundle dump --file=$HOME/.Brewfile --verbose --all --describe --force --no-lock && vcsh brew diff && vcsh brew status" # Dump what's installed to my Brewfile
+	alias brewd="brewdump"
 
 # Sounds
 alias bell="tput bel"
-alias b="tput bel"
+alias beep="bell"
+alias b="bell"
 
-# jq
-alias jqn+s="jq .scripts package.json"
-alias jqn+d="jq .dependancies package.json"
-alias jqc+s="jq .scripts composer.json"
-alias jqc+r="jq .require composer.json"
+# jq: package.json
+alias jqps="jq .scripts package.json"
+alias jqpd="jq .dependancies package.json"
+
+# jq: composer.json
+alias jqcs="jq .scripts composer.json"
+alias jqcr="jq .require composer.json"
+
+# diff
+alias diffd="diff -rq" # Diff a directory.
 
 ###
  # Compress a Video using ffmpeg+crf
@@ -434,7 +449,7 @@ alias jqc+r="jq .require composer.json"
  #
  # @since Tuesday, 5/18/2021
  ##
-function ffmpeg+crfv {
+function compressv {
 
 	OUT="libx264-crf-$2-$1"
 
@@ -446,6 +461,8 @@ function ffmpeg+crfv {
 
 	ffmpeg -i "$1" -vcodec libx264 -crf $2 "$OUT"
 }
+alias compress-video="compressv"
+alias compressvideo="compressv"
 
 ###
  # Misc Nobs
